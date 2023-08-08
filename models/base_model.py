@@ -6,7 +6,7 @@
 #Returns a dictionary containing all keys/values of __dict__ of the instance
 
 import uuid
-import datetime
+import datetime from datetime
 
 class BaseModel:
     """The represent the base model.
@@ -39,11 +39,10 @@ class BaseModel:
 
         """Returns a dictionary containing all keys/values of __dict__ of the instance."""
 
-        return {
-            "id": self.id
-            """created_at": self.created_at
-                updated_at": self.updated_at
-        }
+        obj = self.__init__.copy()
+        obj.created_at = self.created_at.isoformat()
+        obj.updated_at = self.updated_at.isoformat()
+        return obj
 
     def __str__(self):
 
