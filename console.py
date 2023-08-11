@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
         elif array[0] != "BaseModel":
             print('** class doesnt exist **')
-        elif array[1] == "":
+        elif len(array) < 2:
             print('** instance id missing **')
         else:
             allinstance = storage.all()
@@ -58,6 +58,48 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id."""
+        
+        array = arg.split()
+        if not array:
+            print('** class name missing **')
+        elif array[0] != "BaseModel":
+            print('** class doesnt exist **')
+        elif len(array) < 2:
+            print('** instance id missing **')
+        else:
+            allinstance = storage.all()
+            k = "{}.{}".format(array[0], array[1])
+            if k not in allinstance:
+                print('** no instance found **')
+            else:
+                del allinstance[k]
+        storage.save()
+
+    def do_all(self, arg):
+        """ Prints all string representation of all instances based or not on the class name."""
+
+
+
+        array = arg.split()
+        allinstance = storage.all()
+        if not array:
+            for v in allinstance.values():
+                print(str(v))
+        else:
+            if array[0] != "BaseModel":
+                print('** class doesnt exist **')
+            else:
+                for k, v in allinstance.items():
+                    if k.startswith(array[0]+ "."):
+                        print(str(v))
+                    
+
+
+
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id by adding or updating attribute."""
+
+
 
 
             
