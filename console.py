@@ -29,8 +29,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id."""
-        if arg == "BaseModel":
-            obj = BaseModel()
+        if arg == "BaseModel" or array[0] is in BaseModel.__subclasses__():
+            obj = array[0]()
             obj.save()
             print(obj.id)
         elif arg == "":
@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         array = arg.split()
         if not array:
             print('** class name missing **')
-        elif array[0] != "BaseModel":
+        elif array[0] != "BaseModel" and array[0]  in BaseModel.__subclasses__():
             print('** class doesnt exist **')
         elif len(array) < 2:
             print('** instance id missing **')
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
             allinstance = storage.all()
             k = "{}.{}".format(array[0], array[1])
             if k not in allinstance:
-                print('** instance id missing **')
+                print('** no instance found **')
             else:
                 print(allinstance[k])
 
@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
             for v in allinstance.values():
                 print(str(v))
         else:
-            if array[0] != "BaseModel":
+            if array[0] != "BaseModel" and array[0] != "User":
                 print('** class doesnt exist **')
             else:
                 for k, v in allinstance.items():
@@ -99,12 +99,38 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding or updating attribute."""
 
+        array = arg.split()
+        if not array:
+            print("** class name missing **")
+            return
+        if array[0] != "BaseModel" and array[0] != "User":
+            print("** class doesn't exist **")
+            return
+        if len(array) < 2:
+            print("** instance id missing **")
+            return
+        allinstance = storage.all()
+        key = "{}.{}".format(array[0], array[1])
+        if key not in allinstance:
+            print("** no instance found **")
+            return
+        if len(array) < 3:
+            print("** attribute name missing **")
+            return
+        if len(array) < 4:
+            print("** value missing **")
+            return
+        if len(array) >4:
+            pass
+        instance = allinstance[key]
+        if (array[3] != "id" and array[3] != "created_at" and array[3] != "updated_at"):
+            setattr(instance, array[2], array[3])
+            instance.save()
+
 
 
 
             
-
-        
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 
