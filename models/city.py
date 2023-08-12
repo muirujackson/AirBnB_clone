@@ -6,5 +6,5 @@ from models.base_model import BaseModel
 class City(BaseModel):
     """Write all those classes that inherit from BaseModel."""
 
-    state.id = ""
+    state_id = ""
     name = ""
