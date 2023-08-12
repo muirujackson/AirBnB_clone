@@ -43,3 +43,4 @@ class FileStorage:
                     cls = eval(class_name)
                     obj = cls(**v)
                     self.new(obj)
+
