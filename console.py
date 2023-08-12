@@ -17,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """Your command interpreter should implement"""
 
     prompt = '(hbnb) '
+    all_classes = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
     def do_EOF(self, line):
         """to exit the program"""
 
@@ -37,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id."""
         array = arg.split()
-        if arg == "BaseModel" or array[0] in BaseModel.__subclasses__():
+        if arg in self.all_classes:
             obj = eval(array[0])()
             obj.save()
             print(obj.id)
@@ -52,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         array = arg.split()
         if not array:
             print('** class name missing **')
-        elif array[0] != "BaseModel" or array[0] not in BaseModel.__subclasses__():
+        elif array[0] not in self.all_classes:
             print('** class doesnt exist **')
         elif len(array) < 2:
             print('** instance id missing **')
@@ -70,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         array = arg.split()
         if not array:
             print('** class name missing **')
-        elif array[0] != "BaseModel" or array[0] not in BaseModel.__subclasses__():
+        elif array[0] not in self.all_classes:
             print('** class doesnt exist **')
         elif len(array) < 2:
             print('** instance id missing **')
@@ -94,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
             for v in allinstance.values():
                 print(str(v))
         else:
-            if array[0] != "BaseModel" or array[0] not in BaseModel.__subclasses__():
+            if array[0] not in self.all_classes:
                 print('** class doesnt exist **')
             else:
                 for k, v in allinstance.items():
@@ -111,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         if not array:
             print("** class name missing **")
             return
-        if array[0] != "BaseModel" or array[0] not in BaseModel.__subclasses__():
+        if array[0] not in self.all_classes:
             print("** class doesn't exist **")
             return
         if len(array) < 2:
