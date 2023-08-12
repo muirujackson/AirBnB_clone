@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id."""
         if arg == "BaseModel" or array[0] in BaseModel.__subclasses__():
-            obj = array[0]()
+            obj = eval(array[0])()
             obj.save()
             print(obj.id)
         elif arg == "":

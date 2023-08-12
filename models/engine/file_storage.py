@@ -27,7 +27,7 @@ class FileStorage:
         """serializes __objects to the JSON file"""
 
         data = {}
-        for k, v in FileStorage.__objects.items():
+        for k, v in self.__objects.items():
             data[k] = v.to_dict()
         with open(FileStorage.__file_path, 'w') as file:
             json.dump(data, file)
@@ -40,7 +40,7 @@ class FileStorage:
                 data = json.load(file)
                 for k, v in data.items():
                     class_name = v['__class__']
-                    cls = eval(class_name)
-                    obj = cls(**v)
-                    self.new(obj)
+                    self.__objects[k] = eval(class_name)(**v)
+        else:
+            pass
 
