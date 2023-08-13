@@ -47,8 +47,15 @@ class HBNBCommand(cmd.Cmd):
             super().default(line)
 
     def do_count(self, arg):
-        if arg in self.all_classes:
-            print(len(self.do_all(arg)))
+        if arg not in self.all_classes:
+            print('** class doesn\'t exist **')
+        else:
+            count = 0
+            allinstance = storage.all()
+            for k, v in allinstance.items():
+                    if k.startswith(arg + "."):
+                        count = count + 1
+            print(count)
 
 
     def do_create(self, arg):
