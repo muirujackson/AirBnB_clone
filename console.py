@@ -41,8 +41,15 @@ class HBNBCommand(cmd.Cmd):
         args = line.split('.')
         if len(args) == 2 and args[1] == "all()":
             self.do_all(args[0])
+        elif len(args) == 2 and args[1] == "count()":
+            self.do_count(args[0])
         else:
             super().default(line)
+
+    def do_count(self, arg):
+        if arg in self.all_classes:
+            print(len(self.do_all(arg)))
+
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel,
