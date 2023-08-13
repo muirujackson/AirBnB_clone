@@ -43,6 +43,10 @@ class HBNBCommand(cmd.Cmd):
             self.do_all(args[0])
         elif len(args) == 2 and args[1] == "count()":
             self.do_count(args[0])
+        elif len(args) == 2 and args[1].startswith("show(") and args[1].endswith(")"):
+            c_name = args[0]
+            i_id = args[1][5:-1]
+            self.do_show(f"{c_name} {i_id}")
         else:
             super().default(line)
 
