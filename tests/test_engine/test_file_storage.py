@@ -23,17 +23,17 @@ from models.review import Review
 class TestFileStorage_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the FileStorage class."""
 
-    def test_FileStorage_no_args(self):
+    def test_FileStorage_instantiation_no_args(self):
         self.assertEqual(type(FileStorage()), FileStorage)
 
-    def test_FileStorage_with_arg(self):
+    def test_FileStorage_instantiation_with_arg(self):
         with self.assertRaises(TypeError):
             FileStorage(None)
 
-    def test_file_path_is_private_str(self):
+    def test_FileStorage_file_path_is_private_str(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
 
-    def test_objects_is_private_dict(self):
+    def testFileStorage_objects_is_private_dict(self):
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_storage_initializes(self):
@@ -70,22 +70,22 @@ class TestFileStorage_methods(unittest.TestCase):
             models.storage.all(None)
 
     def test_new(self):
-        b_model = BaseModel()
+        bm = BaseModel()
         us = User()
         st = State()
         pl = Place()
         cy = City()
         am = Amenity()
         rv = Review()
-        models.storage.new(b_model)
+        models.storage.new(bm)
         models.storage.new(us)
         models.storage.new(st)
         models.storage.new(pl)
         models.storage.new(cy)
         models.storage.new(am)
         models.storage.new(rv)
-        self.assertIn("BaseModel." + b_model.id, models.storage.all().keys())
-        self.assertIn(b_model, models.storage.all().values())
+        self.assertIn("BaseModel." + bm.id, models.storage.all().keys())
+        self.assertIn(bm, models.storage.all().values())
         self.assertIn("User." + us.id, models.storage.all().keys())
         self.assertIn(us, models.storage.all().values())
         self.assertIn("State." + st.id, models.storage.all().keys())
@@ -104,14 +104,14 @@ class TestFileStorage_methods(unittest.TestCase):
             models.storage.new(BaseModel(), 1)
 
     def test_save(self):
-        b_model = BaseModel()
+        bm = BaseModel()
         us = User()
         st = State()
         pl = Place()
         cy = City()
         am = Amenity()
         rv = Review()
-        models.storage.new(b_model)
+        models.storage.new(bm)
         models.storage.new(us)
         models.storage.new(st)
         models.storage.new(pl)
@@ -122,7 +122,7 @@ class TestFileStorage_methods(unittest.TestCase):
         save_text = ""
         with open("file.json", "r") as f:
             save_text = f.read()
-            self.assertIn("BaseModel." + b_model.id, save_text)
+            self.assertIn("BaseModel." + bm.id, save_text)
             self.assertIn("User." + us.id, save_text)
             self.assertIn("State." + st.id, save_text)
             self.assertIn("Place." + pl.id, save_text)
@@ -135,14 +135,14 @@ class TestFileStorage_methods(unittest.TestCase):
             models.storage.save(None)
 
     def test_reload(self):
-        b_model = BaseModel()
+        bm = BaseModel()
         us = User()
         st = State()
         pl = Place()
         cy = City()
         am = Amenity()
         rv = Review()
-        models.storage.new(b_model)
+        models.storage.new(bm)
         models.storage.new(us)
         models.storage.new(st)
         models.storage.new(pl)
@@ -152,7 +152,7 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.save()
         models.storage.reload()
         objs = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + b_model.id, objs)
+        self.assertIn("BaseModel." + bm.id, objs)
         self.assertIn("User." + us.id, objs)
         self.assertIn("State." + st.id, objs)
         self.assertIn("Place." + pl.id, objs)
