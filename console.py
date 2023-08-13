@@ -35,8 +35,18 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
+    def default(self, line):
+        """update the class.method command"""
+
+        args = line.split('.')
+        if len(args) == 2 and args[1] == "all()":
+            self.do_all(args[0])
+        else:
+            super().default(line)
+
     def do_create(self, arg):
-        """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id."""
+        """Creates a new instance of BaseModel,
+        saves it (to the JSON file) and prints the id."""
         array = arg.split()
         if arg in self.all_classes:
             obj = eval(array[0])()
@@ -48,7 +58,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class doesn\'t exist **')
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id."""
+        """Prints the string representation of an 
+        instance based on the class name and id."""
         
         array = arg.split()
         if not array:
