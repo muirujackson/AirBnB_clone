@@ -133,6 +133,8 @@ class HBNBCommand(cmd.Cmd):
             return
         if len(array) > 4:
             pass
+            return
+
         instance = allinstance[key]
         if (array[3] != "id" and array[3] != "created_at" and array[3] != "updated_at"):
             setattr(instance, array[2], array[3])
