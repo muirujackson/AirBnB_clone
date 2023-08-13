@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         elif arg == "":
             print('** class name missing **')
         else:
-            print('** class doesnt exist **')
+            print('** class doesn\'t exist **')
 
     def do_show(self, arg):
         """Prints the string representation of an instance based on the class name and id."""
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         if not array:
             print('** class name missing **')
         elif array[0] not in self.all_classes:
-            print('** class doesnt exist **')
+            print('** class doesn\'t exist **')
         elif len(array) < 2:
             print('** instance id missing **')
         else:
@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         if not array:
             print('** class name missing **')
         elif array[0] not in self.all_classes:
-            print('** class doesnt exist **')
+            print('** class doesn\'t exist **')
         elif len(array) < 2:
             print('** instance id missing **')
         else:
@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
         obj_list = []
         if len(array) > 0:
             if array[0] not in self.all_classes:
-                print('** class doesnt exist **')
+                print('** class doesn\'t exist **')
             else:
                 for k, v in allinstance.items():
                     if k.startswith(array[0]+ "."):
@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if array[0] not in self.all_classes:
-            print("** class doesn't exist **")
+            print("** class doesn\'t exist **")
             return
         if len(array) < 2:
             print("** instance id missing **")
@@ -144,6 +144,3 @@ class HBNBCommand(cmd.Cmd):
             
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
-
-
