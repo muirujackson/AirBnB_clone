@@ -131,13 +131,12 @@ class HBNBCommand(cmd.Cmd):
         if len(array) < 4:
             print("** value missing **")
             return
-        if len(array) >4:
+        if len(array) > 4:
             pass
         instance = allinstance[key]
         if (array[3] != "id" and array[3] != "created_at" and array[3] != "updated_at"):
             setattr(instance, array[2], array[3])
-            instance.save()
-
+            storage.save()
 
 
 
