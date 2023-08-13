@@ -91,16 +91,18 @@ class HBNBCommand(cmd.Cmd):
 
         array = arg.split()
         allinstance = storage.all()
-        if not array:
-            for v in allinstance.values():
-                print(str(v))
-        else:
+        obj_list = []
+        if len(array) > 0:
             if array[0] not in self.all_classes:
                 print('** class doesnt exist **')
             else:
                 for k, v in allinstance.items():
                     if k.startswith(array[0]+ "."):
-                        print(str(v))
+                        obj_list.append(str(v))
+        else:
+            for k, v in allinstance.items():
+               obj_list.append(str(v))
+        print(obj_list)
                     
 
 
