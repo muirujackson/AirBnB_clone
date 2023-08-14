@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
             arg_list = arg_1.split(', ');
             id_obj = arg_list[0].replace('"', '')
             var_obj = arg_list[1].replace('"', '')
-            val_obj = = arg_list[2].replace('"', '')
+            val_obj = arg_list[2].replace('"', '')
             self.do_update(f"{c_name} {id_obj} {var_obj} {val_obj}")
         else:
             super().default(line)
