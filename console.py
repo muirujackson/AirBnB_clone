@@ -133,9 +133,7 @@ class HBNBCommand(cmd.Cmd):
         array = arg.split()
         allinstance = storage.all()
         obj_list = []
-        if not array:
-            print('** class doesn\'t exist **')
-        elif len(array) > 0:
+        if len(array) > 0:
             if array[0] not in self.all_classes:
                 print('** class doesn\'t exist **')
             else:
@@ -145,7 +143,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in allinstance.items():
                obj_list.append(str(v))
-        print(obj_list)
+
+        if not obj_list:
+            print('** class doesn\'t exist **')
+        else:
+            print(obj_list)
                     
 
 
