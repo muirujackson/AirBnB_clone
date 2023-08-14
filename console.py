@@ -51,6 +51,14 @@ class HBNBCommand(cmd.Cmd):
             c_name = args[0]
             i_id = args[1][8:-1]
             self.do_destroy(f"{c_name} {i_id}")
+        elif len(args) == 2 and args[1].startswith("update(") and args[1].endswith(")"):
+            c_name = args[0]
+            arg_1 = args[1][7:-1]
+            arg_list = arg_1.split(', ');
+            id_obj = arg_list[0].replace('"', '')
+            var_obj = arg_list[1].replace('"', '')
+            val_obj = = arg_list[2].replace('"', '')
+            self.do_update(f"{c_name} {id_obj} {var_obj} {val_obj}")
         else:
             super().default(line)
 
