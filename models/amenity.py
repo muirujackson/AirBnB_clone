@@ -3,8 +3,8 @@
 
 from models.base_model import BaseModel
 
+
 class Amenity(BaseModel):
     """Write all those classes that inherit from BaseModel."""
 
     name = ""
-    
