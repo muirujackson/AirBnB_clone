@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Write a program called console.py that contains the entry point of the command interpreter"""
+"""Write a program called console.py that contains
+the entry point of the command interpreter"""
 
 
 import cmd
@@ -13,20 +14,20 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """Your command interpreter should implement"""
 
     prompt = '(hbnb) '
     all_classes = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
+
     def do_EOF(self, line):
         """to exit the program"""
 
         return True
 
     def do_quit(self, line):
-        """Quit command to exit the program  
-        
-        """
+        """Quit command to exit the program"""
 
         return True
 
@@ -39,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """update the class.method command"""
 
         args = line.split('.')
+
         if len(args) == 2 and args[1] == "all()":
             self.do_all(args[0])
         elif len(args) == 2 and args[1] == "count()":
@@ -51,14 +53,6 @@ class HBNBCommand(cmd.Cmd):
             c_name = args[0]
             i_id = args[1][8:-1]
             self.do_destroy(f"{c_name} {i_id}")
-        elif len(args) == 2 and args[1].startswith("update(") and args[1].endswith(")"):
-            c_name = args[0]
-            arg_1 = args[1][7:-1]
-            arg_list = arg_1.split(', ');
-            id_obj = arg_list[0].replace('"', '')
-            var_obj = arg_list[1].replace('"', '')
-            val_obj = arg_list[2].replace('"', '')
-            self.do_update(f"{c_name} {id_obj} {var_obj} {val_obj}")
         else:
             super().default(line)
 
@@ -69,10 +63,9 @@ class HBNBCommand(cmd.Cmd):
             count = 0
             allinstance = storage.all()
             for k, v in allinstance.items():
-                    if k.startswith(arg + "."):
-                        count = count + 1
+                if k.startswith(arg + "."):
+                    count = count + 1
             print(count)
-
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel,
@@ -88,9 +81,9 @@ class HBNBCommand(cmd.Cmd):
             print('** class doesn\'t exist **')
 
     def do_show(self, arg):
-        """Prints the string representation of an 
+        """Prints the string representation of an
         instance based on the class name and id."""
-        
+
         array = arg.split()
         if not array:
             print('** class name missing **')
@@ -108,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id."""
-        
+
         array = arg.split()
         if not array:
             print('** class name missing **')
@@ -126,9 +119,8 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        """ Prints all string representation of all instances based or not on the class name."""
-
-
+        """ Prints all string representation of all
+         instances basedor not on the class name."""
 
         array = arg.split()
         allinstance = storage.all()
@@ -138,22 +130,16 @@ class HBNBCommand(cmd.Cmd):
                 print('** class doesn\'t exist **')
             else:
                 for k, v in allinstance.items():
-                    if k.startswith(array[0]+ "."):
+                    if k.startswith(array[0] + "."):
                         obj_list.append(str(v))
         else:
             for k, v in allinstance.items():
-               obj_list.append(str(v))
-
-        if not obj_list:
-            print('** class doesn\'t exist **')
-        else:
-            print(obj_list)
-                    
-
-
+                obj_list.append(str(v))
+        print(obj_list)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute."""
+        """Updates an instance based on the class name
+        and id by adding or updating attribute."""
 
         array = arg.split()
         if not array:
@@ -186,7 +172,5 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
 
-
-            
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
